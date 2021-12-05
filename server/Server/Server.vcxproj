@@ -142,6 +142,7 @@
     <ClCompile Include="Currency.cpp" />
     <ClCompile Include="CustomFunctions.cpp" />
     <ClCompile Include="Mailing.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="Shares.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Weather.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="CustomFunctions.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="Mailing.h" />
+    <ClInclude Include="Server.h" />
     <ClInclude Include="Shares.h" />
     <ClInclude Include="Weather.h" />
   </ItemGroup>

@@ -10,7 +10,7 @@ class Shares : public Mailing
 {
 	friend void SharesThread(void* Param);
 public:
-	Shares(int time);
+	Shares(int time = 10000);
 
 	virtual void SendMailThread() override;
 };

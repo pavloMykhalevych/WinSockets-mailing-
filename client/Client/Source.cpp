@@ -9,11 +9,19 @@ SOCKET Connection;
 void ClientHandler() {
 	int msg_size;
 	while (true) {
-		recv(Connection, (char*)&msg_size, sizeof(int), NULL);
+		int err = recv(Connection, (char*)&msg_size, sizeof(int), NULL);
+		if (err == SOCKET_ERROR) {
+			std::cout << "\nServer turns off!\nExiting...";
+			std::cout << "\nThanks for using our service!";
+			break;
+		}
 		char* msg = new char[msg_size + 1];
 		msg[msg_size] = '\0';
 		recv(Connection, msg, msg_size, NULL);
 		std::cout << msg << std::endl;
+		if (!strcmp(msg, "Server turns off!\nExiting...")) {
+			break;
+		}
 		delete[] msg;
 	}
 }
@@ -45,12 +53,19 @@ int main(int argc, char* argv[]) {
 	std::string msg1;
 	while (true) {
 		std::getline(std::cin, msg1);
+		if (msg1 == "Exit") {
+			break;
+		}
 		int msg_size = msg1.size();
 		send(Connection, (char*)&msg_size, sizeof(int), NULL);
-		send(Connection, msg1.c_str(), msg_size, NULL);
+		int err = send(Connection, msg1.c_str(), msg_size, NULL);
+		if (err == SOCKET_ERROR) {
+			std::cout << "\nServer turns off!\nExiting...";
+			break;
+		}
 		Sleep(10);
 	}
-
+	std::cout << "\nThanks for using our service!";
 	system("pause");
 	return 0;
 }

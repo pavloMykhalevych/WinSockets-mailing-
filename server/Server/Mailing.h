@@ -16,6 +16,8 @@ public:
 	virtual void SendMailThread() = 0;
 
 	void SendMail(std::string mes);
+
+	virtual ~Mailing()  = default;
 protected:
 	int m_period;
 

@@ -10,7 +10,7 @@ class Weather : public Mailing
 {
 	friend void WeatherThread(void* Param);
 public:
-	Weather(int time);
+	Weather(int time = 60000);
 
 	virtual void SendMailThread() override;
 };

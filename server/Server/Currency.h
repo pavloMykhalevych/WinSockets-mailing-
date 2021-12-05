@@ -10,7 +10,7 @@ class Currency : public Mailing
 {
 	friend void CurrencyThread(void* Param);
 public:
-	Currency(int time);
+	Currency(int time = 25000);
 
 	virtual void SendMailThread() override;
 };
