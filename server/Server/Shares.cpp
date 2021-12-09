@@ -16,7 +16,7 @@ void Shares::SendMailThread() {
 		double airbus = ((rand() % 300) / 100.) + 98.5;
 		std::ostringstream airbusStr;
 		airbusStr << std::fixed << std::setprecision(2) << airbus;
-		std::string mes = "Shares:\n\tApple - " + appleStr.str() + " (USD)\n"
+		std::string mes = currentDateTime() + " Shares:\n\tApple - " + appleStr.str() + " (USD)\n"
 			+ "\tMicrosoft - " + microsoftStr.str() + " (USD)\n"
 			+ "\tAirbus - " + airbusStr.str() + " (USD)\n";
 		SendMail(mes);

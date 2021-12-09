@@ -12,7 +12,7 @@ void Weather::SendMailThread() {
 		double pressure = ((rand() % 300) / 10.0) + 985.;
 		std::ostringstream pressureStr;
 		pressureStr << std::fixed << std::setprecision(1) << pressure;
-		std::string mes = "Weather:\n\tTemperature: " + std::to_string(temp)
+		std::string mes =  currentDateTime() + " Weather:\n\tTemperature: " + std::to_string(temp)
 			+ " C\n\tHumidity: " + std::to_string(humidity)
 			+ " %\n\tPressure: " + pressureStr.str() + " hPA\n";
 		SendMail(mes);

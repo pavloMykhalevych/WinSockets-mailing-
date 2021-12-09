@@ -16,7 +16,7 @@ void Currency::SendMailThread() {
 		double chf = ((rand() % 150) / 100.) + 29.5;
 		std::ostringstream chfStr;
 		chfStr << std::fixed << std::setprecision(2) << chf;
-		std::string mes = "Currency:\n\t1 (EUR) - " + euroStr.str() + " (UAH)\n"
+		std::string mes = currentDateTime() + " Currency:\n\t1 (EUR) - " + euroStr.str() + " (UAH)\n"
 			+ "\t1 (USD) - " + dollarStr.str() + " (UAH)\n"
 			+ "\t1 (CHF) - " + chfStr.str() + " (UAH)\n";
 		SendMail(mes);

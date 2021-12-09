@@ -1,5 +1,5 @@
 #pragma warning(disable: 4996)
-
+#define _CRT_SECURE_NO_WARNINGS
 #include "Server.h"
 
 void ServerThread(void* Param) {
@@ -38,7 +38,7 @@ void Server::Start() {
 			std::cout << "Error: can't connect client.\n";
 		}
 		else {
-			std::cout << "Client Connected.\n";
+			std::cout << currentDateTime() <<"Client Connected.\n";
 			SendString("Welcome to the mailing service)\nIf you want to subscribe on some services, choose onr from this:\n"
 				"1) Weather mailing;\n2) Currency mailing;\n3) Shares mailing;\n"
 				"Note: If you will need to unsubscribe from one of services write: \"Delete\" and number of service.", newConnection);
@@ -55,7 +55,7 @@ void Server::ClientHandler(int index) {
 	while (true) {
 		int err = recv(Connections[index], (char*)&msg_size, sizeof(int), NULL);
 		if (err == SOCKET_ERROR) {
-			std::cout << "Client has disconnected.\n";
+			std::cout << currentDateTime() << "Client has disconnected.\n";
 			break;
 		}
 		char* msg = new char[msg_size + 1];
