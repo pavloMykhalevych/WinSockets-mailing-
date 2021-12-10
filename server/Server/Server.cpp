@@ -39,7 +39,7 @@ void Server::Start() {
 		}
 		else {
 			std::cout << currentDateTime() <<"Client Connected.\n";
-			SendString("Welcome to the mailing service)\nIf you want to subscribe on some services, choose onr from this:\n"
+			SendString("Welcome to the mailing service)\nIf you want to subscribe on some services, choose one from this:\n"
 				"1) Weather mailing;\n2) Currency mailing;\n3) Shares mailing;\n"
 				"Note: If you will need to unsubscribe from one of services write: \"Delete\" and number of service.", newConnection);
 			Connections.push_back(newConnection);
@@ -96,6 +96,16 @@ void Server::ClientHandler(int index) {
 		}
 		else if (!strcmp(msg, "Delete 3")) {
 			SendString(m_sharesMail->Delete(Connections[index]), Connections[index]);
+		}
+		else if (!strcmp(msg, "help")) {
+			SendString("Welcome to the mailing service)\nIf you want to subscribe on some services, choose one from this:\n"
+				"1) Weather mailing;\n2) Currency mailing;\n3) Shares mailing;\n"
+				"Note: If you will need to unsubscribe from one of services write: \"Delete\" and number of service.", Connections[index]);
+		}
+		else if (!strcmp(msg, "Exit")) {
+			m_weatherMail->Delete(Connections[index]);
+			m_currencyMail->Delete(Connections[index]);
+			m_sharesMail->Delete(Connections[index]);
 		}
 		else {
 			SendString("Unknown command, try to write it again.", Connections[index]);

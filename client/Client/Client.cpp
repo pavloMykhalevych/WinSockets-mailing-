@@ -25,13 +25,17 @@ void Client::Start() {
 		return;
 	}
 	std::cout << "Connected!\n";
-
-	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, (void *)this, NULL, NULL);
+	HANDLE clientThread;
+	clientThread = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, (void *)this, NULL, NULL);
 
 	std::string msg1;
 	while (true) {
 		std::getline(std::cin, msg1);
 		if (msg1 == "Exit") {
+			int msg_size = msg1.size();
+			send(m_connection, (char*)&msg_size, sizeof(int), NULL);
+			int err = send(m_connection, msg1.c_str(), msg_size, NULL);
+			TerminateThread(clientThread,NULL);
 			break;
 		}
 		int msg_size = msg1.size();
@@ -41,7 +45,7 @@ void Client::Start() {
 			std::cout << "\nServer turns off!\nExiting...";
 			break;
 		}
-		Sleep(10);
+		//Sleep(10);
 	}
 	std::cout << "\nThanks for using our service!";
 }
@@ -51,8 +55,8 @@ void Client::ClientClassThread() {
 	while (true) {
 		int err = recv(m_connection, (char*)&msg_size, sizeof(int), NULL);
 		if (err == SOCKET_ERROR) {
-			std::cout << "\nServer turns off!\nExiting...";
-			std::cout << "\nThanks for using our service!";
+			//std::cout << "\nServer turns off!\nExiting...";
+			//std::cout << "\nThanks for using our service!";
 			break;
 		}
 		char* msg = new char[msg_size + 1];
